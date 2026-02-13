@@ -1,0 +1,25 @@
+================================================================================
+DEPLOY REACT ON NETLIFY (single-user project)
+================================================================================
+
+1. Go to https://app.netlify.com and sign in (e.g. with GitHub).
+
+2. Add new site -> Import an existing project -> GitHub.
+
+3. Choose repo: reading-from-root
+
+4. Build settings:
+   - Base directory: frontend
+   - Build command: npm install && npm run build
+   - Publish directory: frontend/dist
+
+5. Environment variables -> Add a variable:
+   - Key: VITE_API_URL
+   - Value: your Render backend URL (e.g. https://reading-from-root-api.onrender.com)
+   No trailing slash.
+
+6. Click Deploy site.
+
+7. When done, your site URL (e.g. https://something.netlify.app) is the URL to give to players.
+
+================================================================================

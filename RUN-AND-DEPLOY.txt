@@ -1,0 +1,42 @@
+================================================================================
+READING FROM ROOT - SINGLE USER - COMMANDS AND URL
+================================================================================
+
+REACT (frontend)
+  cd frontend
+  npm install
+  npm start
+  -> Opens at http://localhost:3000
+
+FLASK (backend)
+  cd backend
+  python pip_install.py
+
+  Or:
+  cd backend
+  python -m venv venv
+  venv\Scripts\activate
+  pip install -r requirements.txt
+  python app.py
+
+  -> Runs at http://localhost:5000
+
+RUN BOTH TOGETHER (one command)
+  From project folder:  python run.py
+
+DEPLOY (Netlify + Render)
+  1. Push to GitHub - repo name: reading-from-root
+  2. Render - Web Service, Root Directory = backend
+     Build:  pip install -r requirements.txt
+     Start:  gunicorn app:app --bind 0.0.0.0:$PORT
+  3. Netlify - Import repo, Base directory = frontend
+     Build:  npm install && npm run build
+     Publish:  frontend/dist
+     Add variable:  VITE_API_URL = your Render backend URL (no trailing slash)
+
+URL TO GIVE TO THE USER (to connect and start playing)
+  Your Netlify site URL after deploy.
+  Example:  https://reading-from-root.netlify.app
+  (Replace with your actual Netlify URL.)
+
+================================================================================

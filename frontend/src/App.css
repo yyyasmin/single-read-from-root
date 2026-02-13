@@ -1,0 +1,267 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Heebo', sans-serif;
+  background: linear-gradient(160deg, #e8f4f8 0%, #f0e6fa 100%);
+  min-height: 100vh;
+  direction: rtl;
+}
+
+#root {
+  min-height: 100vh;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #2d3748;
+  margin: 0.5em 0;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.menu-btn {
+  font-size: 1.25rem;
+  padding: 20px 18px;
+}
+
+.menu-btn {
+  font-family: inherit;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+  color: #2d3748;
+  font-weight: 700;
+}
+
+.menu-btn:hover, .menu-btn:focus {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.menu-btn.logical {
+  background: linear-gradient(135deg, #b8e6f0 0%, #a8d8e8 100%);
+}
+
+.menu-btn.verbs {
+  background: linear-gradient(135deg, #f0d8e8 0%, #e8c8e0 100%);
+}
+
+.menu-btn.yesno { background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); }
+.menu-btn.completion { background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%); }
+.menu-btn.transform { background: linear-gradient(135deg, #e2d5f1 0%, #d4c4e8 100%); }
+.menu-btn.root { background: linear-gradient(135deg, #d5f0e2 0%, #b8e6d0 100%); }
+
+.phrase-display {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.5;
+}
+
+.yesno-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.yesno-buttons .option-btn {
+  flex: 1;
+  min-width: 120px;
+  font-size: 1.6rem;
+}
+
+.sentence-display {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  color: #2d3748;
+}
+
+.original-sentence {
+  font-size: 1.1rem;
+  color: #718096;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.instruction {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin: 16px 0 24px;
+  line-height: 1.6;
+}
+
+.task-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  margin-bottom: 24px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.option-btn {
+  font-family: inherit;
+  font-size: 1.35rem;
+  padding: 24px 20px;
+  border: 3px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  background: #fff;
+  color: #2d3748;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: #a0aec0;
+  background: #f7fafc;
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.option-btn.correct {
+  border-color: #38a169;
+  background: #c6f6d5;
+  color: #276749;
+}
+
+.option-btn.wrong {
+  border-color: #e53e3e;
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.subject-display {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.progress {
+  text-align: center;
+  font-size: 1rem;
+  color: #718096;
+  margin-bottom: 16px;
+}
+
+.feedback {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 16px 0;
+  min-height: 2rem;
+}
+
+.feedback.good {
+  color: #38a169;
+}
+
+.feedback.bad {
+  color: #e53e3e;
+}
+
+.next-btn {
+  font-family: inherit;
+  font-size: 1.3rem;
+  padding: 18px 32px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  background: #4299e1;
+  color: #fff;
+  font-weight: 700;
+  display: block;
+  margin: 20px auto 0;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.next-btn:hover {
+  background: #3182ce;
+  transform: scale(1.03);
+}
+
+.back-btn {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 12px 20px;
+  border: 2px solid #cbd5e0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #fff;
+  color: #4a5568;
+  margin-bottom: 20px;
+}
+
+.back-btn:hover {
+  background: #edf2f7;
+}
+
+.summary {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.summary h2 {
+  margin-bottom: 16px;
+}
+
+.summary p {
+  font-size: 1.3rem;
+  color: #4a5568;
+  margin: 8px 0;
+}
+
+.error-msg {
+  text-align: center;
+  color: #e53e3e;
+  padding: 20px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #718096;
+  padding: 40px;
+}

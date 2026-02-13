@@ -1,0 +1,19 @@
+================================================================================
+SINGLE MODE: PUSH ONE FOLDER OR BACKEND/FRONTEND SEPARATELY?
+================================================================================
+
+Push the WHOLE folder (לקרוא מן השורש) to ONE repo.
+
+Do NOT push backend and frontend separately.
+
+  - One repo name: reading-from-root
+  - What to push: the whole project (the folder that contains backend, frontend,
+    run.py, netlify.toml, render.yaml, etc.)
+
+Netlify and Render will use only the part they need:
+  - Netlify: you set "Base directory = frontend" so it builds only the frontend.
+  - Render: you set "Root Directory = backend" so it runs only the backend.
+
+So: one repo, one push, with both backend and frontend inside it.
+
+================================================================================

@@ -1,0 +1,25 @@
+================================================================================
+DEPLOY FLASK ON RENDER (single-user project)
+================================================================================
+
+1. Go to https://render.com and sign in (e.g. with GitHub).
+
+2. Click New then Web Service.
+
+3. Connect your GitHub repo: reading-from-root
+   (If not connected, link your GitHub account first.)
+
+4. Settings:
+   - Name: reading-from-root-api (or any name)
+   - Root Directory: backend
+   - Runtime: Python 3
+   - Build Command: pip install -r requirements.txt
+   - Start Command: gunicorn app:app --bind 0.0.0.0:$PORT
+
+5. Click Create Web Service.
+
+6. Wait for deploy to finish. Then copy your service URL
+   (e.g. https://reading-from-root-api.onrender.com)
+   Use this URL as VITE_API_URL in Netlify (no trailing slash).
+
+================================================================================
