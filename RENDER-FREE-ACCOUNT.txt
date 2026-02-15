@@ -1,0 +1,21 @@
+================================================================================
+RENDER - WHAT TO CHOOSE FOR A FREE ACCOUNT
+================================================================================
+
+When it asks:
+
+  "What would you like to call your workspace?"
+  -> Type anything, e.g.  My workspace  (or leave "My workspace").
+  Optional, no effect on free tier.
+
+  "What will you use this workspace for?"
+  -> Choose:  Personal projects
+  (Free tier is for personal/small use.)
+
+  "How many developers (including yourself) will be working together?"
+  -> Choose:  Just me
+
+Then continue. That keeps you on the free tier. You can create a Web Service
+and use the free plan (service may sleep after inactivity but will work).
+
+================================================================================

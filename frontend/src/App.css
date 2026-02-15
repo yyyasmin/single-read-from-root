@@ -75,6 +75,34 @@ h2 {
 .menu-btn.completion { background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%); }
 .menu-btn.transform { background: linear-gradient(135deg, #e2d5f1 0%, #d4c4e8 100%); }
 .menu-btn.root { background: linear-gradient(135deg, #d5f0e2 0%, #b8e6d0 100%); }
+.menu-btn.pyramid { background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); }
+
+.pyramid-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pyramid-rows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0;
+  padding: 20px;
+}
+.pyramid-row {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+.pyramid-read-hint {
+  font-size: 1.1rem;
+  color: #718096;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
 
 .phrase-display {
   font-size: 1.5rem;

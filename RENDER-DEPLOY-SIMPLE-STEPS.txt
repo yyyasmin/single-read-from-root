@@ -1,0 +1,65 @@
+================================================================================
+DEPLOY YOUR PROJECT ON RENDER – SIMPLE STEPS (START HERE)
+================================================================================
+
+STEP 1 – OPEN RENDER
+   Open in your browser:   https://dashboard.render.com
+   Log in (e.g. with GitHub if you use yyyasmin).
+
+STEP 2 – SEE WHAT YOU HAVE
+   On the dashboard you see a list of "Services".
+   - Do you see a service named something like "single-read-from-root"?
+   - Click it. At the top you should see a URL like:
+     https://single-read-from-root.onrender.com
+   If that URL works when you open it (or the service says "Live"), your backend
+   is already deployed. You do NOT need to do anything on Render. Just set
+   VITE_API_URL in Netlify to that URL and deploy the frontend.
+
+   If you don't see any service, or the service is broken/wrong, go to STEP 3.
+
+STEP 3 – CREATE A NEW WEB SERVICE (OR FIX THE ONE YOU HAVE)
+
+   A) If you have NO service: click "New +" → "Web Service".
+   B) If you have a service but it's wrong: click that service → "Settings" →
+      scroll to the bottom → "Save Changes" after fixing the values below.
+      Or create a new one with "New +" → "Web Service" and use these values.
+
+   Connect repo: choose  yyyasmin / single-read-from-root  → Connect.
+
+   Then fill the form EXACTLY like this:
+
+   Name:             single-read-from-root
+   Language:         Python 3        (NOT Node – change the dropdown!)
+   Branch:           master
+   Region:           Oregon (US West)  (or leave default)
+   Root Directory:   backend         (type the word: backend)
+   Build Command:    pip install -r requirements.txt
+   Start Command:    gunicorn app:app --bind 0.0.0.0:$PORT
+   Instance Type:   Free
+
+   Environment Variables: leave empty.
+
+   Click "Create Web Service" (or "Save" if you were editing).
+
+STEP 4 – WAIT FOR BUILD
+   Render will build and deploy. Wait until it says "Build successful" and
+   "Your service is live at https://....onrender.com". That is your backend URL.
+
+STEP 5 – CONNECT FRONTEND (NETLIFY)
+   In Netlify (https://app.netlify.com): your site → Site configuration →
+   Environment variables. Add:
+   Key:   VITE_API_URL
+   Value: https://single-read-from-root.onrender.com   (use YOUR URL from Render)
+   Then: Deployments → Trigger deploy → Deploy site.
+
+================================================================================
+WHY IT LOOKED "LOST"
+================================================================================
+Render shows one service per page. If you had two services (e.g. one called
+single-read-from-root and one single-read-from-root-1), the correct settings
+are on ONE of them. Check the list on the dashboard and open each – the one
+with URL https://single-read-from-root.onrender.com and Python/gunicorn is
+the right one. If you only have one service and it shows Node, set the values
+in STEP 3 once and Save – they will stick.
+
+================================================================================

@@ -112,6 +112,84 @@ ROOT_TABLE = [
     {"id": 5, "root": "ר.פ.א", "ask": "יְחִידָה", "word": "רוֹפְאָה", "options": ["רוֹפֵא", "רוֹפְאָה", "רוֹפְאִים", "רוֹפְאוֹת"]},
 ]
 
+# קריאת פירמידה – הדרגתי: פתח, קמץ, חיריק, חולם, צירה/סגול, משולב
+# level: patach, kamatz, chirik, cholam, tsere_segol, mixed
+# mode: "read" = רק קריאה והבא, "choose" = בחר את המילה שקראת
+PYRAMID_TASKS = [
+    # === פתח (קל) ===
+    {"id": 1, "level": "patach", "rows": ["ב", "בָּ", "בָּא"], "fullWord": "בָּא"},
+    {"id": 2, "level": "patach", "rows": ["ר", "רַ", "רַב"], "fullWord": "רַב"},
+    {"id": 3, "level": "patach", "rows": ["ג", "גַּ", "גַּן"], "fullWord": "גַּן"},
+    {"id": 4, "level": "patach", "rows": ["ד", "דַּ", "דַּל"], "fullWord": "דַּל"},
+    {"id": 5, "level": "patach", "rows": ["ה", "הַ", "הַר"], "fullWord": "הַר"},
+    {"id": 6, "level": "patach", "rows": ["כ", "כַּ", "כַּף"], "fullWord": "כַּף"},
+    {"id": 7, "level": "patach", "rows": ["מ", "מַ", "מַת"], "fullWord": "מַת"},
+    {"id": 8, "level": "patach", "rows": ["פ", "פַּ", "פַּר"], "fullWord": "פַּר"},
+    {"id": 9, "level": "patach", "rows": ["ש", "שַׁ", "שַׁר"], "fullWord": "שַׁר"},
+    {"id": 10, "level": "patach", "rows": ["ת", "תַּ", "תַּם"], "fullWord": "תַּם"},
+    # === קמץ ===
+    {"id": 11, "level": "kamatz", "rows": ["כ", "כָּ", "כָּן"], "fullWord": "כָּן"},
+    {"id": 12, "level": "kamatz", "rows": ["פ", "פָּ", "פָּה"], "fullWord": "פָּה"},
+    {"id": 13, "level": "kamatz", "rows": ["ד", "דָּ", "דָּם"], "fullWord": "דָּם"},
+    {"id": 14, "level": "kamatz", "rows": ["ח", "חָ", "חָם"], "fullWord": "חָם"},
+    {"id": 15, "level": "kamatz", "rows": ["ק", "קָ", "קָם"], "fullWord": "קָם"},
+    {"id": 16, "level": "kamatz", "rows": ["ר", "רָ", "רָץ"], "fullWord": "רָץ"},
+    {"id": 17, "level": "kamatz", "rows": ["ש", "שָׁ", "שָׁם"], "fullWord": "שָׁם"},
+    {"id": 18, "level": "kamatz", "rows": ["כָּ", "כָּן", "כָּנָף"], "fullWord": "כָּנָף"},
+    {"id": 19, "level": "kamatz", "rows": ["פָּ", "פָּנִי", "פָּנִים"], "fullWord": "פָּנִים"},
+    {"id": 20, "level": "kamatz", "rows": ["דָּ", "דָּג", "דָּגִים"], "fullWord": "דָּגִים"},
+    # === חיריק ===
+    {"id": 21, "level": "chirik", "rows": ["ד", "דִּ", "דִּבְ"], "fullWord": "דִּבְ"},
+    {"id": 22, "level": "chirik", "rows": ["כ", "כְּ", "כְּתִי"], "fullWord": "כְּתִי"},
+    {"id": 23, "level": "chirik", "rows": ["מ", "מִ", "מִשְׁ"], "fullWord": "מִשְׁ"},
+    {"id": 24, "level": "chirik", "rows": ["ס", "סִ", "סִיר"], "fullWord": "סִיר"},
+    {"id": 25, "level": "chirik", "rows": ["פ", "פִּ", "פִּרְ"], "fullWord": "פִּרְ"},
+    {"id": 26, "level": "chirik", "rows": ["דִּ", "דִּבְרָה"], "fullWord": "דִּבְרָה"},
+    {"id": 27, "level": "chirik", "rows": ["כְּ", "כְּתִיבָה"], "fullWord": "כְּתִיבָה"},
+    {"id": 28, "level": "chirik", "rows": ["מִ", "מִשְׁפָּחָה"], "fullWord": "מִשְׁפָּחָה"},
+    {"id": 29, "level": "chirik", "rows": ["פִּ", "פִּרְחֵי"], "fullWord": "פִּרְחֵי"},
+    {"id": 30, "level": "chirik", "rows": ["שִׁ", "שִׁיר", "שִׁירָה"], "fullWord": "שִׁירָה"},
+    # === חולם ===
+    {"id": 31, "level": "cholam", "rows": ["ס", "סוֹ", "סוֹפֵר"], "fullWord": "סוֹפֵר"},
+    {"id": 32, "level": "cholam", "rows": ["פ", "פּוֹ", "פּוֹל"], "fullWord": "פּוֹל"},
+    {"id": 33, "level": "cholam", "rows": ["ר", "רוֹ", "רוֹפֵא"], "fullWord": "רוֹפֵא"},
+    {"id": 34, "level": "cholam", "rows": ["כ", "כּוֹ", "כּוֹכָב"], "fullWord": "כּוֹכָב"},
+    {"id": 35, "level": "cholam", "rows": ["ל", "לוֹ", "לוֹחֵם"], "fullWord": "לוֹחֵם"},
+    {"id": 36, "level": "cholam", "rows": ["ח", "חוֹ", "חוֹלֵם"], "fullWord": "חוֹלֵם"},
+    {"id": 37, "level": "cholam", "rows": ["שׁ", "שׁוֹ", "שׁוֹטֵר"], "fullWord": "שׁוֹטֵר"},
+    {"id": 38, "level": "cholam", "rows": ["ג", "גּוֹ", "גּוֹלֶה"], "fullWord": "גּוֹלֶה"},
+    {"id": 39, "level": "cholam", "rows": ["ב", "בּוֹ", "בּוֹנֶה"], "fullWord": "בּוֹנֶה"},
+    {"id": 40, "level": "cholam", "rows": ["סוֹ", "סוֹפֵר", "סוֹפְרִים"], "fullWord": "סוֹפְרִים"},
+    # === צירה, סגול ===
+    {"id": 41, "level": "tsere_segol", "rows": ["ב", "בֶּ", "בֶּן"], "fullWord": "בֶּן"},
+    {"id": 42, "level": "tsere_segol", "rows": ["ש", "שֶׁ", "שֶׁל"], "fullWord": "שֶׁל"},
+    {"id": 43, "level": "tsere_segol", "rows": ["כ", "כֶּ", "כֶּף"], "fullWord": "כֶּף"},
+    {"id": 44, "level": "tsere_segol", "rows": ["ג", "גֶּ", "גֶּרֶן"], "fullWord": "גֶּרֶן"},
+    {"id": 45, "level": "tsere_segol", "rows": ["ד", "דֶּ", "דֶּלֶת"], "fullWord": "דֶּלֶת"},
+    {"id": 46, "level": "tsere_segol", "rows": ["ה", "הֶ", "הֶחְ"], "fullWord": "הֶחְ"},
+    {"id": 47, "level": "tsere_segol", "rows": ["מ", "מֶ", "מֶלֶךְ"], "fullWord": "מֶלֶךְ"},
+    {"id": 48, "level": "tsere_segol", "rows": ["פ", "פֶּ", "פֶּרַח"], "fullWord": "פֶּרַח"},
+    {"id": 49, "level": "tsere_segol", "rows": ["שֶׁ", "שֶׁמֶשׁ"], "fullWord": "שֶׁמֶשׁ"},
+    {"id": 50, "level": "tsere_segol", "rows": ["בֶּ", "בֶּגֶד", "בְּגָדִים"], "fullWord": "בְּגָדִים"},
+    # === משולב (קושי עולה) ===
+    {"id": 51, "level": "mixed", "rows": ["מ", "מַ", "מַחֲ", "מַחֲנֶה"], "fullWord": "מַחֲנֶה"},
+    {"id": 52, "level": "mixed", "rows": ["ש", "שָׁ", "שָׁנִי", "שָׁנִיָּה"], "fullWord": "שָׁנִיָּה"},
+    {"id": 53, "level": "mixed", "rows": ["כ", "כְּ", "כְּבָ", "כְּבָשִׂים"], "fullWord": "כְּבָשִׂים"},
+    {"id": 54, "level": "mixed", "rows": ["פ", "פֶּ", "פֶּרַח", "פְּרָחִים"], "fullWord": "פְּרָחִים"},
+    {"id": 55, "level": "mixed", "rows": ["ר", "רַ", "רַעֲ", "רַעֲמוֹן"], "fullWord": "רַעֲמוֹן"},
+    {"id": 56, "level": "mixed", "rows": ["ד", "דֶּ", "דֶּרֶךְ", "דְּרָכִים"], "fullWord": "דְּרָכִים"},
+    {"id": 57, "level": "mixed", "rows": ["ה", "הַ", "הַגָּ", "הַגָּדוֹל"], "fullWord": "הַגָּדוֹל"},
+    {"id": 58, "level": "mixed", "rows": ["ב", "בַּ", "בַּיִת", "בָּתִּים"], "fullWord": "בָּתִּים"},
+    {"id": 59, "level": "mixed", "rows": ["ס", "סַ", "סַפָּר", "סַפָּרִים"], "fullWord": "סַפָּרִים"},
+    {"id": 60, "level": "mixed", "rows": ["ת", "תּוֹ", "תּוֹרָה", "תּוֹרָתִי"], "fullWord": "תּוֹרָתִי"},
+    # מגוון: בחר את המילה שקראת (צורה שונה)
+    {"id": 61, "level": "patach", "mode": "choose", "rows": ["ג", "גַּ", "גַּן"], "options": ["גַּן", "גָּן"], "correct": 1},
+    {"id": 62, "level": "kamatz", "mode": "choose", "rows": ["פ", "פָּ", "פָּה"], "options": ["פֶּה", "פָּה"], "correct": 2},
+    {"id": 63, "level": "cholam", "mode": "choose", "rows": ["ס", "סוֹ", "סוֹפֵר"], "options": ["סוֹפֵר", "סָפַר"], "correct": 1},
+    {"id": 64, "level": "tsere_segol", "mode": "choose", "rows": ["ב", "בֶּ", "בֶּן"], "options": ["בֶּן", "בָּן"], "correct": 1},
+    {"id": 65, "level": "mixed", "mode": "choose", "rows": ["מ", "מַ", "מַחֲ", "מַחֲנֶה"], "options": ["מַחֲנֶה", "מְחָנָה"], "correct": 1},
+]
+
 
 @app.route("/api/logical-sentences", methods=["GET"])
 def get_logical_sentences():
@@ -151,6 +229,11 @@ def get_sentence_transform():
 @app.route("/api/root-table", methods=["GET"])
 def get_root_table():
     return jsonify(ROOT_TABLE)
+
+
+@app.route("/api/pyramid", methods=["GET"])
+def get_pyramid():
+    return jsonify(PYRAMID_TASKS)
 
 
 @app.route("/api/health", methods=["GET"])

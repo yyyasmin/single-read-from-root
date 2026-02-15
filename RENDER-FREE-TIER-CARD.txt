@@ -1,0 +1,30 @@
+================================================================================
+RENDER - FREE TIER AND THE CARD MESSAGE
+================================================================================
+
+Render DOES have a free tier. You are not wrong.
+
+- Free tier: Free instance (512 MB RAM), spins down after 15 min inactivity,
+  750 free hours/month. No charge if you stay within free limits.
+
+- The "Add Card" / $1 verification: Render sometimes asks for a card to
+  verify identity. The $1 is a temporary hold (usually released in a few days).
+  You are not charged for free tier usage.
+
+- Do you HAVE to add a card? According to Render's docs, no card is required
+  for the free tier. So:
+  1. Look for "Skip" or "Continue without card" or "Use free tier only" on
+     the same page. Some accounts can deploy without adding a card.
+  2. If you only see "Add Card", try closing that and going to Dashboard ->
+     your service -> see if the deploy already started. Sometimes the card
+     prompt is for paid features and free deploy still works.
+  3. If you are okay with a temporary $1 hold (refunded), add the card;
+     you won't be charged if you use only the free instance.
+
+Alternatives if you don't want to add a card at all:
+- Fly.io has a free allowance (card may be required there too).
+- PythonAnywhere (free tier, limited).
+- Keep the app running locally and use Netlify only for frontend (no backend
+  in the cloud).
+
+================================================================================

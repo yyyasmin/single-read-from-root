@@ -1,0 +1,15 @@
+================================================================================
+RENDER - "WHERE ARE YOU MIGRATING YOUR PROJECT FROM?"
+================================================================================
+
+You are using Git (GitHub). You are not migrating from AWS, Heroku, etc.
+
+Choose:  Project running locally
+
+That means: your project was running on your computer (and is in a GitHub repo).
+You are now deploying it to Render. This is the right choice.
+
+(If "Project running locally" is not there, choose:  Other  and continue.
+It is optional; you can skip if possible.)
+
+================================================================================

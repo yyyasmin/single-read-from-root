@@ -1,0 +1,32 @@
+================================================================================
+NETLIFY: HOW TO CHOOSE FRONTEND (you pushed the whole folder)
+================================================================================
+
+1. In the repo list, click the repo you pushed (e.g. single-read-from-root).
+   That selects it. Click Continue or next.
+
+2. Netlify will show "Build settings" or "Configure build".
+   You do NOT pick "frontend" from a list. You TYPE it in a box.
+
+3. Find the field called:
+     "Base directory"  or  "Root directory"  or  "Directory"
+   It may be empty or show "."
+
+4. In that field, type exactly (no spaces):
+     frontend
+
+5. Then set:
+   - Build command:    npm install && npm run build
+   - Publish directory:  frontend/dist
+
+6. Add environment variable (for single-user project):
+   - Key:   VITE_API_URL
+   - Value: your Render backend URL (e.g. https://reading-from-root-api.onrender.com)
+   No trailing slash.
+
+7. Deploy.
+
+So: you chose the whole repo; then in the Base directory box you type the
+word  frontend  so Netlify builds only that subfolder.
+
+================================================================================

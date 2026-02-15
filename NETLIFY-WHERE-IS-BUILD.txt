@@ -1,0 +1,28 @@
+================================================================================
+NETLIFY: WHERE IS BUILD SETTINGS? (your menu)
+================================================================================
+
+In your left menu you have "Project configuration" - that is where build settings are.
+
+1. Click:  Project configuration
+
+2. On that page you should see sections like:
+   - Repository / Git
+   - Build
+   - Deploy
+   - Environment variables
+
+   Or tabs: "General", "Build", "Environment", etc.
+
+3. Click the "Build" section (or the Build tab) to see:
+   - Base directory
+   - Build command
+   - Publish directory
+
+4. Change:
+   Base directory  ->  frontend
+   Publish directory  ->  dist
+
+5. To add VITE_API_URL: go to "Environment variables" (same Project configuration page or a tab there), then "Add variable" or "Add environment variable".
+
+================================================================================

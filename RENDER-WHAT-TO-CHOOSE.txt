@@ -1,0 +1,17 @@
+================================================================================
+RENDER - WHICH SERVICE TO USE?
+================================================================================
+
+You want to deploy the Flask BACKEND (API). That is a Web Service.
+
+Choose:  New Web Service
+
+Do NOT choose:
+  - Static Sites (that is for frontend; your frontend is on Netlify)
+  - Key Value (Redis - you don't need that)
+  - Private Services, Workers, Cron Jobs, Postgres (not for this project)
+
+Click "New Web Service" and then connect your GitHub repo (single-read-from-root).
+Set Root Directory = backend, Build and Start commands as in USE-RENDER-FOR-SINGLE-READ-FROM-ROOT.txt.
+
+================================================================================

@@ -32,7 +32,131 @@ function Menu({ onChoose }) {
         <button className="menu-btn root" onClick={() => onChoose('root')}>
           מילה מהשורש
         </button>
+        <button className="menu-btn pyramid" onClick={() => onChoose('pyramid')}>
+          קריאת פירמידה
+        </button>
       </div>
+    </>
+  )
+}
+
+const PYRAMID_LEVELS = [
+  { id: 'patach', label: 'פתח' },
+  { id: 'kamatz', label: 'קמץ' },
+  { id: 'chirik', label: 'חיריק' },
+  { id: 'cholam', label: 'חולם' },
+  { id: 'tsere_segol', label: 'צירה, סגול' },
+  { id: 'mixed', label: 'משולב' },
+]
+
+function PyramidLevelMenu({ onChooseLevel, onBack }) {
+  return (
+    <>
+      <button className="back-btn" onClick={onBack}>← חזרה</button>
+      <h2>קריאת פירמידה</h2>
+      <p className="instruction">בחר דף – מהקל אל הקשה</p>
+      <div className="menu">
+        {PYRAMID_LEVELS.map((lev) => (
+          <button
+            key={lev.id}
+            className="menu-btn pyramid"
+            onClick={() => onChooseLevel(lev.id)}
+          >
+            {lev.label}
+          </button>
+        ))}
+      </div>
+    </>
+  )
+}
+
+function PyramidGame({ tasks, levelLabel, onBack }) {
+  const [index, setIndex] = useState(0)
+  const [chosen, setChosen] = useState(null)
+  const [score, setScore] = useState(0)
+  const [showFeedback, setShowFeedback] = useState(false)
+  const task = tasks[index]
+  const isLast = index === tasks.length - 1
+  const isChoose = task && task.mode === 'choose'
+  const options = isChoose && task.options ? [...task.options].sort(() => Math.random() - 0.5) : []
+
+  const handleChoose = (word) => {
+    if (chosen !== null) return
+    setChosen(word)
+    const correctWord = task.options[task.correct - 1]
+    if (word === correctWord) setScore((s) => s + 1)
+    setShowFeedback(true)
+  }
+
+  const handleNext = () => {
+    if (isLast) return
+    setIndex((i) => i + 1)
+    setChosen(null)
+    setShowFeedback(false)
+  }
+
+  const handleFinish = () => {
+    setIndex(0)
+    setChosen(null)
+    setShowFeedback(false)
+    setScore(0)
+    onBack()
+  }
+
+  if (!task) return null
+  const correctChosen = isChoose ? chosen === task.options[task.correct - 1] : true
+
+  return (
+    <>
+      <button className="back-btn" onClick={onBack}>← חזרה</button>
+      <h2>קריאת פירמידה – {levelLabel}</h2>
+      <p className="progress">תרגיל {index + 1} מתוך {tasks.length}</p>
+      <div className="task-card pyramid-card">
+        <div className="pyramid-rows">
+          {task.rows.map((row, i) => (
+            <div key={i} className="pyramid-row">{row}</div>
+          ))}
+        </div>
+        {isChoose ? (
+          <>
+            <p className="instruction">איזו מילה קראת?</p>
+            <div className="options">
+              {options.map((word) => {
+                const correctWord = task.options[task.correct - 1]
+                const showCorrect = chosen !== null && word === correctWord
+                const showWrong = chosen !== null && chosen === word && word !== correctWord
+                return (
+                  <button
+                    key={word}
+                    className={`option-btn ${showCorrect ? 'correct' : showWrong ? 'wrong' : ''}`}
+                    onClick={() => handleChoose(word)}
+                    disabled={chosen !== null}
+                  >
+                    {word}
+                  </button>
+                )
+              })}
+            </div>
+            {showFeedback && (
+              <p className={`feedback ${correctChosen ? 'good' : 'bad'}`}>
+                {correctChosen ? 'כל הכבוד! ✓' : 'לא הפעם. הנכון: ' + task.options[task.correct - 1]}
+              </p>
+            )}
+          </>
+        ) : (
+          <p className="pyramid-read-hint">קרא את הפירמידה ואז לחץ הבא</p>
+        )}
+        {(!isChoose || showFeedback) && (
+          isLast ? (
+            <button className="next-btn" onClick={handleFinish}>סיום וחזרה לדפים</button>
+          ) : (
+            <button className="next-btn" onClick={handleNext}>הבא →</button>
+          )
+        )}
+      </div>
+      {isLast && showFeedback && (
+        <p className="summary"><strong>ניקוד: {score} מתוך {tasks.length}</strong></p>
+      )}
     </>
   )
 }
@@ -515,10 +639,12 @@ const ENDPOINTS = [
   { key: 'completion', url: 'sentence-completion' },
   { key: 'transform', url: 'sentence-transform' },
   { key: 'root', url: 'root-table' },
+  { key: 'pyramid', url: 'pyramid' },
 ]
 
 export default function App() {
   const [screen, setScreen] = useState('menu')
+  const [pyramidLevel, setPyramidLevel] = useState(null)
   const [data, setData] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -570,6 +696,25 @@ export default function App() {
   }
   if (screen === 'root') {
     return <RootTableGame tasks={data.root || []} onBack={() => setScreen('menu')} />
+  }
+  if (screen === 'pyramid') {
+    if (!pyramidLevel) {
+      return (
+        <PyramidLevelMenu
+          onChooseLevel={(lev) => setPyramidLevel(lev)}
+          onBack={() => setScreen('menu')}
+        />
+      )
+    }
+    const pyramidTasks = (data.pyramid || []).filter((t) => t.level === pyramidLevel)
+    const levelLabel = PYRAMID_LEVELS.find((l) => l.id === pyramidLevel)?.label || pyramidLevel
+    return (
+      <PyramidGame
+        tasks={pyramidTasks}
+        levelLabel={levelLabel}
+        onBack={() => setPyramidLevel(null)}
+      />
+    )
   }
   return <Menu onChoose={setScreen} />
 }

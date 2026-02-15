@@ -1,19 +1,30 @@
-================================================================================
-SINGLE MODE: PUSH ONE FOLDER OR BACKEND/FRONTEND SEPARATELY?
-================================================================================
+"טוען..." STOPS HERE – WHAT TO DO
 
-Push the WHOLE folder (לקרוא מן השורש) to ONE repo.
+--------------------------------------------------------------------------------
 
-Do NOT push backend and frontend separately.
+"טוען..." means the app is loading and waiting for the backend (Render).
+It often stops there because the free Render instance was sleeping and needs
+up to about 1 minute to wake up.
 
-  - One repo name: reading-from-root
-  - What to push: the whole project (the folder that contains backend, frontend,
-    run.py, netlify.toml, render.yaml, etc.)
+DO THIS:
 
-Netlify and Render will use only the part they need:
-  - Netlify: you set "Base directory = frontend" so it builds only the frontend.
-  - Render: you set "Root Directory = backend" so it runs only the backend.
+1. Wait 1–2 minutes on the same page (don't refresh yet). Often the backend
+   responds after ~50–60 seconds and the menu appears.
 
-So: one repo, one push, with both backend and frontend inside it.
+2. If after 2 minutes it's still "טוען...":
+   - Open a new tab and go to: https://single-read-from-root.onrender.com/api/logical-sentences
+   - If that page is slow or blank at first, then loads JSON after a while:
+     Render was sleeping. Go back to your Netlify tab and refresh once; the
+     backend is now awake so it should load quickly.
+   - If that URL never loads or shows an error: check Render dashboard to see
+     if the service is running and look at the logs.
 
-================================================================================
+3. Optional: Press F12 on your Netlify page → Network tab. You'll see
+   requests to single-read-from-root.onrender.com. If they stay "Pending"
+   for a long time, it's the backend waking up. When they turn 200, the
+   page should show the menu.
+
+--------------------------------------------------------------------------------
+
+Summary: First time after idle, wait 1–2 minutes. If it still sticks, open
+the API URL in another tab to wake Render, then refresh the game page.

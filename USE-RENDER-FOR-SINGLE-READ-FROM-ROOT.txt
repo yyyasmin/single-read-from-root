@@ -1,0 +1,45 @@
+================================================================================
+INSTRUCTIONS: USE RENDER FOR SINGLE-READ-FROM-ROOT (BACKEND)
+================================================================================
+
+This project = single user game. Frontend on Netlify, backend on Render.
+
+STEP 1 - Sign in to Render first
+  Go to:  https://render.com
+  Click "Log in" or "Get started". Sign in with GitHub (or email).
+  You must be signed in before you can create a Web Service.
+
+STEP 2 - Create Web Service
+  Click "New +" then "Web Service".
+
+STEP 3 - Connect repo
+  Select your GitHub repo:  single-read-from-root
+  (If GitHub is not connected, connect it first.)
+
+STEP 4 - Settings
+  Name:              reading-from-root-api  (or any name)
+  Root Directory:    backend
+  Runtime:           Python 3
+  Build Command:     pip install -r requirements.txt
+  Start Command:     gunicorn app:app --bind 0.0.0.0:$PORT
+
+STEP 5 - Create
+  Click "Create Web Service". Wait for deploy to finish.
+
+STEP 6 - Copy URL
+  At the top of the service page you will see a URL like:
+  https://reading-from-root-api.onrender.com
+  Copy it. No trailing slash.
+
+STEP 7 - Netlify
+  Open your site on Netlify (single-read-from-root-frontend).
+  Go to: Project configuration -> Environment variables.
+  Add variable:
+    Key:   VITE_API_URL
+    Value: the URL from step 6 (e.g. https://reading-from-root-api.onrender.com)
+  Save. Then trigger a new deploy (Deploys -> Trigger deploy).
+
+STEP 8 - Play
+  Open your Netlify site URL. The game will use the backend on Render.
+
+================================================================================

@@ -1,0 +1,22 @@
+================================================================================
+NETLIFY - ENVIRONMENT VARIABLE TO ADD (single-read-from-root)
+================================================================================
+
+Key (exactly):
+  VITE_API_URL
+
+Value:
+  Your Render backend URL. Examples:
+  - If you already deployed on Render:  https://reading-from-root-api.onrender.com
+  - Or whatever URL Render gave you (starts with https://, no slash at the end)
+
+  No space. No trailing slash. No /api at the end.
+  Example correct:  https://something.onrender.com
+  Example wrong:   https://something.onrender.com/
+
+If you have NOT deployed the backend on Render yet:
+  1. Deploy Flask on Render first (see deploy-flask-on-render.txt)
+  2. Copy the URL Render gives you
+  3. Then add here:  Key = VITE_API_URL , Value = that URL
+
+================================================================================

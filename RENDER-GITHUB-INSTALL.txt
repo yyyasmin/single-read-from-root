@@ -1,0 +1,17 @@
+================================================================================
+RENDER - GITHUB "INSTALL RENDER" PAGE - WHAT TO DO
+================================================================================
+
+Choose:  Only select repositories
+
+Then click "Select repositories" and choose at least:
+  - single-read-from-root
+  (Add muktyplayers-reading-from-root later if you deploy the multiplayer project on Render too.)
+
+That way Render can only see and use those repos, not all your GitHub repos.
+
+The permissions shown (read code, read/write deployments, etc.) are normal for Render to deploy from your repo. Click "Install" or "Authorize" to continue.
+
+After you install, you will go back to Render and can connect the repo when creating the Web Service.
+
+================================================================================

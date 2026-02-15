@@ -1,0 +1,51 @@
+================================================================================
+RENDER - WHAT TO CHOOSE FOR EACH BOX (Web Service)
+================================================================================
+
+Source Code
+  yyyasmin / single-read-from-root
+  -> Leave as is (already correct). Click Edit only if you need to change repo.
+
+Name
+  ->  single-read-from-root
+  Or change to:  reading-from-root-api
+  (Any unique name is fine.)
+
+Language
+  -> Do NOT leave Node. Change to:  Python 3
+  (Click the Language dropdown and select Python 3.)
+
+Branch
+  ->  master
+  (Leave as is if your repo uses master.)
+
+Region
+  ->  Oregon (US West)
+  (Or any region. Leave default.)
+
+Root Directory (Optional)  <-- YOU ARE MISSING THIS!
+  ->  backend
+  (Type exactly:  backend   so Render uses only the backend folder.
+   This is IMPORTANT - without it Render will try to run from the repo root
+   and won't find your Flask app.)
+
+Build Command
+  -> Delete "yarn". Type:  pip install -r requirements.txt
+
+Start Command
+  -> Delete "yarn start". Type:  gunicorn app:app --bind 0.0.0.0:$PORT
+
+Instance Type
+  ->  Free  ($0/month)
+  (Click "Free" so you stay on the free tier.)
+
+Environment Variables
+  -> Leave empty for now. You do not need to add any for this project.
+  (Add later only if your code needs API keys or secrets.)
+
+Advanced
+  -> Do not change. Leave defaults.
+
+Then click:  Deploy web service
+
+================================================================================

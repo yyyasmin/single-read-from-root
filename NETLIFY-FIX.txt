@@ -1,0 +1,40 @@
+================================================================================
+NETLIFY - CORRECT THESE (current settings are WRONG)
+================================================================================
+
+CHANGE:
+
+1. Base directory
+   You have:  backend
+   Must be:   frontend
+   (Netlify builds the React app. React is in the frontend folder, not backend.)
+
+2. Publish directory
+   You have:  backend/dist
+   Must be:   dist
+   (When Base directory is "frontend", the build output is frontend/dist,
+   so Publish directory is just "dist" relative to that.)
+
+3. Functions directory
+   You have:  backend/netlify/functions
+   Change to:  leave empty or delete the value
+   (This project does not use Netlify functions.)
+
+4. Environment variables
+   WHERE TO FIND IT:
+   - In the left menu, click "Environment variables" (under "Build & deploy")
+   - OR look for "Add environment variables" button on the Build settings page
+   - OR click "Site configuration" -> "Environment variables"
+   
+   Add:  VITE_API_URL  =  your Render backend URL
+   Example:  https://reading-from-root-api.onrender.com
+   No trailing slash.
+
+CORRECT SUMMARY:
+  Branch: master  (ok)
+  Base directory:  frontend
+  Build command:  npm install && npm run build  (ok)
+  Publish directory:  dist
+  Then add VITE_API_URL and click Deploy.
+
+================================================================================

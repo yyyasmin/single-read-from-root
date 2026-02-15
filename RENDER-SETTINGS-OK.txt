@@ -1,0 +1,24 @@
+================================================================================
+RENDER - YOUR SETTINGS ARE CORRECT
+================================================================================
+
+  Source Code:     yyyasmin / single-read-from-root   ✓
+  Name:            single-read-from-root             ✓
+  Language:        Python 3                         ✓
+  Branch:          master                           ✓
+  Region:          Oregon (US West)                  ✓
+  Root Directory:  backend                          ✓
+  Build Command:   pip install -r requirements.txt   ✓
+  Start Command:   gunicorn app:app --bind 0.0.0.0:$PORT  ✓
+  Instance Type:   Free                             ✓
+  Environment Variables:  (empty - fine)              ✓
+
+The "backend/ $" you see in front of the commands is just Render showing
+that commands run from the backend folder. Your commands are correct.
+
+Click "Deploy web service" to start the deploy.
+
+After it finishes, copy the URL Render gives you (e.g. https://single-read-from-root.onrender.com)
+and add it in Netlify as  VITE_API_URL  (no trailing slash).
+
+================================================================================

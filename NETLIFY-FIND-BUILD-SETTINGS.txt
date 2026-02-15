@@ -1,0 +1,40 @@
+================================================================================
+NETLIFY: HOW TO FIND BUILD SETTINGS
+================================================================================
+
+STEP 1 - Open your site
+  Go to: https://app.netlify.com
+  Click on your site name: single-read-from-root-frontend
+
+STEP 2 - Open the menu
+  Look at the LEFT SIDEBAR. You should see:
+    - Site overview
+    - Deploys
+    - Build & deploy    <-- CLICK THIS
+    - and more...
+
+STEP 3 - Under "Build & deploy"
+  After clicking "Build & deploy", a submenu may open. Look for:
+    - Continuous deployment   <-- CLICK THIS (or "Build settings")
+  That page shows: Branch, Base directory, Build command, Publish directory.
+  Click "Edit settings" or "Configure" or "Options" to change them.
+
+ALTERNATIVE PATH (newer Netlify):
+  Left menu -> "Site configuration" -> "Build & deploy" -> "Continuous deployment"
+  Then click "Edit settings" or the pencil icon next to the build settings.
+
+STEP 4 - If you still don't see it
+  Left menu -> "Site configuration" (or "Configuration")
+  Then look for "Build settings" or "Build & deploy" on that page.
+
+STEP 5 - Change the values
+  Base directory:  type  frontend
+  Publish directory:  type  dist
+  Save.
+
+ENVIRONMENT VARIABLE:
+  Left menu -> "Environment variables" (under Build & deploy)
+  Or: Site configuration -> Environment variables
+  Click "Add a variable" or "Add environment variable" -> Add "VITE_API_URL".
+
+================================================================================
