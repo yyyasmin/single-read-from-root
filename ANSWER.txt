@@ -1,30 +1,25 @@
-"טוען..." STOPS HERE – WHAT TO DO
+תקוע על "טוען..." – מה לעשות
 
 --------------------------------------------------------------------------------
 
-"טוען..." means the app is loading and waiting for the backend (Render).
-It often stops there because the free Render instance was sleeping and needs
-up to about 1 minute to wake up.
+"טוען..." אומר שהאפליקציה מחכה לתשובה מהשרת (Backend). אם זה נשאר כך:
 
-DO THIS:
+1. אם אתה פותח את האתר מ-NETLIFY ( production):
+   - השרת ב-Render על Free נכנס לשינה אחרי ~15 דקות ללא גלישה.
+   - חכה 1–2 דקות – לפעמים השרת מתעורר ואז העמוד נטען.
+   - או: פתח בטאב חדש את הכתובת:
+     https://single-read-from-root.onrender.com/api/health
+     חכה עד שמופיע {"status":"ok"}, אחר כך חזור לאתר Netlify ורענן.
 
-1. Wait 1–2 minutes on the same page (don't refresh yet). Often the backend
-   responds after ~50–60 seconds and the menu appears.
+2. אם אתה רץ LOCALLY (localhost):
+   - וודא שהבקאנד רץ. מהתיקייה של הפרויקט הרץ:
+     python run.py
+     או: python backend/run_flask.py
+     (או run_flask.py לפי מה שיש אצלך.)
+   - וודא שב-frontend יש משתנה VITE_API_URL שמצביע לשרת, למשל:
+     http://localhost:5000
+     (בקובץ .env בתיקיית frontend או בהגדרות ההרצה.)
 
-2. If after 2 minutes it's still "טוען...":
-   - Open a new tab and go to: https://single-read-from-root.onrender.com/api/logical-sentences
-   - If that page is slow or blank at first, then loads JSON after a while:
-     Render was sleeping. Go back to your Netlify tab and refresh once; the
-     backend is now awake so it should load quickly.
-   - If that URL never loads or shows an error: check Render dashboard to see
-     if the service is running and look at the logs.
-
-3. Optional: Press F12 on your Netlify page → Network tab. You'll see
-   requests to single-read-from-root.onrender.com. If they stay "Pending"
-   for a long time, it's the backend waking up. When they turn 200, the
-   page should show the menu.
+3. הוספתי timeout של 90 שניות: אם השרת לא מגיב עד אז, יופיע הודעת שגיאה במקום "טוען...", ואפשר לרענן או לבדוק את השרת.
 
 --------------------------------------------------------------------------------
-
-Summary: First time after idle, wait 1–2 minutes. If it still sticks, open
-the API URL in another tab to wake Render, then refresh the game page.

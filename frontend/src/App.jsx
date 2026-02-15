@@ -47,6 +47,7 @@ const PYRAMID_LEVELS = [
   { id: 'cholam', label: 'חולם' },
   { id: 'tsere_segol', label: 'צירה, סגול' },
   { id: 'mixed', label: 'משולב' },
+  { id: 'word_to_sentence', label: 'מילה למשפט (5 מילים)' },
 ]
 
 function PyramidLevelMenu({ onChooseLevel, onBack }) {
@@ -111,7 +112,7 @@ function PyramidGame({ tasks, levelLabel, onBack }) {
       <button className="back-btn" onClick={onBack}>← חזרה</button>
       <h2>קריאת פירמידה – {levelLabel}</h2>
       <p className="progress">תרגיל {index + 1} מתוך {tasks.length}</p>
-      <div className="task-card pyramid-card">
+      <div className={`task-card pyramid-card ${levelLabel.includes('מילה למשפט') ? 'pyramid-sentence' : ''}`}>
         <div className="pyramid-rows">
           {task.rows.map((row, i) => (
             <div key={i} className="pyramid-row">{row}</div>
@@ -654,7 +655,21 @@ export default function App() {
     setLoading(true)
     setError(null)
     const urls = ENDPOINTS.map((e) => `${API_BASE}/${e.url}`)
-    Promise.all(urls.map((url) => fetch(url).then((r) => r.ok ? r.json() : Promise.reject(new Error(url)))))
+    const FETCH_TIMEOUT_MS = 90000
+    const fetchWithTimeout = (url) => {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
+      return fetch(url, { signal: controller.signal })
+        .then((r) => {
+          clearTimeout(timeoutId)
+          return r.ok ? r.json() : Promise.reject(new Error(url))
+        })
+        .catch((err) => {
+          clearTimeout(timeoutId)
+          return Promise.reject(err)
+        })
+    }
+    Promise.all(urls.map((url) => fetchWithTimeout(url)))
       .then((results) => {
         if (cancelled) return
         const next = {}
@@ -662,7 +677,7 @@ export default function App() {
         setData(next)
       })
       .catch(() => {
-        if (!cancelled) setError('לא ניתן לטעון את המשימות. בדוק שהשרת רץ.')
+        if (!cancelled) setError('לא ניתן לטעון את המשימות. בדוק שהשרת רץ. (אם האתר על Render – חכה עד דקה עד שהשרת מתעורר.)')
       })
       .finally(() => {
         if (!cancelled) setLoading(false)
