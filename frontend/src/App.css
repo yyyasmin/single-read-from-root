@@ -299,3 +299,70 @@ h2 {
   color: #718096;
   padding: 40px;
 }
+
+/* גרירה – הברה במקום הריק */
+.drag-card .drag-word-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+.drag-card .word-part {
+  letter-spacing: 0.02em;
+}
+.drag-drop-zone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  min-height: 52px;
+  padding: 8px 14px;
+  border: 3px dashed #a0aec0;
+  border-radius: 12px;
+  background: #f7fafc;
+  color: #718096;
+  font-size: 1.4rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.drag-drop-zone.filled {
+  border-style: solid;
+  border-color: #cbd5e0;
+  background: #edf2f7;
+  color: #2d3748;
+}
+.drag-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.drag-option-chip {
+  display: inline-block;
+  padding: 14px 22px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+  border: 2px solid #e8c04a;
+  border-radius: 14px;
+  cursor: grab;
+  color: #2d3748;
+  user-select: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.drag-option-chip:hover:not(.used) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+.drag-option-chip.used {
+  cursor: default;
+  opacity: 0.7;
+}
+.drag-option-chip:active {
+  cursor: grabbing;
+}

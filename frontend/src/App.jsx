@@ -35,6 +35,9 @@ function Menu({ onChoose }) {
         <button className="menu-btn pyramid" onClick={() => onChoose('pyramid')}>
           קריאת פירמידה
         </button>
+        <button className="menu-btn completion" onClick={() => onChoose('dragSyllable')}>
+          גרור את ההברה הנכונה (חולם)
+        </button>
       </div>
     </>
   )
@@ -81,11 +84,11 @@ function PyramidGame({ tasks, levelLabel, onBack }) {
   const isChoose = task && task.mode === 'choose'
   const options = isChoose && task.options ? [...task.options].sort(() => Math.random() - 0.5) : []
 
+  const correctWordPyramid = isChoose && task.options ? task.options[Number(task.correct) - 1] : null
   const handleChoose = (word) => {
     if (chosen !== null) return
     setChosen(word)
-    const correctWord = task.options[task.correct - 1]
-    if (word === correctWord) setScore((s) => s + 1)
+    if (word === correctWordPyramid) setScore((s) => s + 1)
     setShowFeedback(true)
   }
 
@@ -105,7 +108,7 @@ function PyramidGame({ tasks, levelLabel, onBack }) {
   }
 
   if (!task) return null
-  const correctChosen = isChoose ? chosen === task.options[task.correct - 1] : true
+  const correctChosen = isChoose ? chosen === correctWordPyramid : true
 
   return (
     <>
@@ -123,9 +126,8 @@ function PyramidGame({ tasks, levelLabel, onBack }) {
             <p className="instruction">איזו מילה קראת?</p>
             <div className="options">
               {options.map((word) => {
-                const correctWord = task.options[task.correct - 1]
-                const showCorrect = chosen !== null && word === correctWord
-                const showWrong = chosen !== null && chosen === word && word !== correctWord
+                const showCorrect = chosen !== null && word === correctWordPyramid
+                const showWrong = chosen !== null && chosen === word && word !== correctWordPyramid
                 return (
                   <button
                     key={word}
@@ -140,7 +142,7 @@ function PyramidGame({ tasks, levelLabel, onBack }) {
             </div>
             {showFeedback && (
               <p className={`feedback ${correctChosen ? 'good' : 'bad'}`}>
-                {correctChosen ? 'כל הכבוד! ✓' : 'לא הפעם. הנכון: ' + task.options[task.correct - 1]}
+                {correctChosen ? 'כל הכבוד! ✓' : 'לא הפעם. הנכון: ' + correctWordPyramid}
               </p>
             )}
           </>
@@ -170,10 +172,11 @@ function LogicalGame({ tasks, onBack, title }) {
   const task = tasks[index]
   const isLast = index === tasks.length - 1
 
+  const correctNum = Number(task?.correct)
   const handleChoose = (optionNum) => {
     if (chosen !== null) return
     setChosen(optionNum)
-    if (optionNum === task.correct) setScore((s) => s + 1)
+    if (Number(optionNum) === correctNum) setScore((s) => s + 1)
     setShowFeedback(true)
   }
 
@@ -193,7 +196,7 @@ function LogicalGame({ tasks, onBack, title }) {
   }
 
   if (!task) return null
-  const correctChosen = chosen === task.correct
+  const correctChosen = chosen !== null && Number(chosen) === correctNum
 
   return (
     <>
@@ -203,14 +206,14 @@ function LogicalGame({ tasks, onBack, title }) {
       <div className="task-card">
         <div className="options">
           <button
-            className={`option-btn ${chosen === 1 ? (task.correct === 1 ? 'correct' : 'wrong') : ''}`}
+            className={`option-btn ${chosen === 1 ? (correctNum === 1 ? 'correct' : 'wrong') : ''}`}
             onClick={() => handleChoose(1)}
             disabled={chosen !== null}
           >
             {task.option1}
           </button>
           <button
-            className={`option-btn ${chosen === 2 ? (task.correct === 2 ? 'correct' : 'wrong') : ''}`}
+            className={`option-btn ${chosen === 2 ? (correctNum === 2 ? 'correct' : 'wrong') : ''}`}
             onClick={() => handleChoose(2)}
             disabled={chosen !== null}
           >
@@ -401,7 +404,7 @@ function SentenceCompletionGame({ tasks, onBack }) {
   const task = tasks[index]
   const isLast = index === tasks.length - 1
   const options = task ? [task.option1, task.option2].sort(() => Math.random() - 0.5) : []
-  const correctWord = task ? (task.correct === 1 ? task.option1 : task.option2) : null
+  const correctWord = task ? (Number(task.correct) === 1 ? task.option1 : task.option2) : null
 
   const handleChoose = (word) => {
     if (chosen !== null) return
@@ -479,7 +482,7 @@ function SentenceTransformGame({ tasks, onBack }) {
   const [showFeedback, setShowFeedback] = useState(false)
   const task = tasks[index]
   const isLast = index === tasks.length - 1
-  const correctWord = task ? task.options[task.correct - 1] : null
+  const correctWord = task ? task.options[Number(task.correct) - 1] : null
   const options = task ? [...task.options].sort(() => Math.random() - 0.5) : []
 
   const handleChoose = (word) => {
@@ -535,6 +538,103 @@ function SentenceTransformGame({ tasks, onBack }) {
         {showFeedback && (
           <p className={`feedback ${correctChosen ? 'good' : 'bad'}`}>
             {correctChosen ? 'כל הכבוד! ✓' : 'לא הפעם. הנכון: ' + correctWord}
+          </p>
+        )}
+        {showFeedback && (
+          isLast ? (
+            <button className="next-btn" onClick={handleFinish}>סיום וחזרה לתפריט</button>
+          ) : (
+            <button className="next-btn" onClick={handleNext}>הבא →</button>
+          )
+        )}
+      </div>
+      {isLast && showFeedback && (
+        <p className="summary"><strong>ניקוד: {score} מתוך {tasks.length}</strong></p>
+      )}
+    </>
+  )
+}
+
+function DragSyllableGame({ tasks, onBack }) {
+  const [index, setIndex] = useState(0)
+  const [dropped, setDropped] = useState(null)
+  const [score, setScore] = useState(0)
+  const [showFeedback, setShowFeedback] = useState(false)
+  const task = tasks[index]
+  const isLast = index === tasks.length - 1
+  const options = task ? [...task.options].sort(() => Math.random() - 0.5) : []
+  const correctOption = task?.correctOption ?? ''
+
+  const handleDragStart = (e, option) => {
+    e.dataTransfer.setData('text/plain', option)
+    e.dataTransfer.effectAllowed = 'move'
+  }
+
+  const handleDragOver = (e) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+    if (dropped !== null) return
+    const value = e.dataTransfer.getData('text/plain')
+    setDropped(value)
+    if (value === correctOption) setScore((s) => s + 1)
+    setShowFeedback(true)
+  }
+
+  const handleNext = () => {
+    if (isLast) return
+    setIndex((i) => i + 1)
+    setDropped(null)
+    setShowFeedback(false)
+  }
+
+  const handleFinish = () => {
+    setIndex(0)
+    setDropped(null)
+    setShowFeedback(false)
+    setScore(0)
+    onBack()
+  }
+
+  if (!task) return null
+  const correctChosen = dropped === correctOption
+
+  return (
+    <>
+      <button className="back-btn" onClick={onBack}>← חזרה</button>
+      <h2>גרור את ההברה הנכונה למקום הריק</h2>
+      <p className="progress">תרגיל {index + 1} מתוך {tasks.length}</p>
+      <div className="task-card drag-card">
+        <p className="instruction">הכנס את ההברה המתאימה במילה:</p>
+        <div className="drag-word-row" dir="rtl">
+          {task.before && <span className="word-part">{task.before}</span>}
+          <span
+            className={`drag-drop-zone ${dropped ? 'filled' : ''}`}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+          >
+            {dropped ?? '___'}
+          </span>
+          <span className="word-part">{task.after}</span>
+        </div>
+        <div className="drag-options">
+          {options.map((opt) => (
+            <span
+              key={opt}
+              className={`drag-option-chip ${dropped !== null ? 'used' : ''}`}
+              draggable={dropped === null}
+              onDragStart={(e) => handleDragStart(e, opt)}
+            >
+              {opt}
+            </span>
+          ))}
+        </div>
+        {showFeedback && (
+          <p className={`feedback ${correctChosen ? 'good' : 'bad'}`}>
+            {correctChosen ? 'כל הכבוד! ✓' : 'לא הפעם. הנכון: ' + correctOption}
           </p>
         )}
         {showFeedback && (
@@ -641,6 +741,7 @@ const ENDPOINTS = [
   { key: 'transform', url: 'sentence-transform' },
   { key: 'root', url: 'root-table' },
   { key: 'pyramid', url: 'pyramid' },
+  { key: 'dragSyllable', url: 'drag-syllable' },
 ]
 
 export default function App() {
@@ -711,6 +812,9 @@ export default function App() {
   }
   if (screen === 'root') {
     return <RootTableGame tasks={data.root || []} onBack={() => setScreen('menu')} />
+  }
+  if (screen === 'dragSyllable') {
+    return <DragSyllableGame tasks={data.dragSyllable || []} onBack={() => setScreen('menu')} />
   }
   if (screen === 'pyramid') {
     if (!pyramidLevel) {
